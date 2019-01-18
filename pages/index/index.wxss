@@ -1,21 +1,66 @@
 /**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.lang-change {
+  background: rgba(22,194,194,.1);
+  padding: 20rpx 30rpx;
+  font-size: 20rpx;
+  color: #777;
 }
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.from,.to {
+  display: inline-block;
 }
-
-.userinfo-nickname {
-  color: #aaa;
+.currentFrom,.currentTo {
+  position: relative;
 }
+.currentFrom .list,.currentTo .list {
+  position: absolute;
+  width: 180rpx;
+  top:50rpx;
+  left:-30rpx;
+  background: rgba(22,194,194,.05);
+  z-index: 999;
+}
+.currentFrom .item,.currentTo .item {
+  border-bottom: 1px solid rgba(22,194,194,.1);
+  padding: 5px 0 5px 15px;
+}
+.currentFrom .item .icon-right,.currentTo .item .icon-right{
+  float: right;
+  margin-right: 8px;
+}
+.lang-change .exchange{
+  font-size:28rpx;
+  margin: 0 35rpx;
 
-.usermotto {
-  margin-top: 200px;
+}
+.input-area {
+  position: relative;
+}
+.input-area textarea {
+  background-color: #fff;
+  padding: 30rpx 0 30rpx 30rpx;
+  width: calc(100% - 48rpx);
+  margin: 0;
+  box-sizing: border-box;
+}
+.input-area .icon-close {
+  position: absolute;
+  right: 12rpx;
+  top: 20rpx;
+  z-index: 100;
+  font-size: 40rpx;
+  color: #888;
+}
+.result-container {
+  border-top: 1px solid #888;
+  background: #fff;
+}
+.result-container .title{
+  color: #666;
+  font-size: 24rpx;
+  padding: 20rpx 30rpx;
+}
+.result-container .result{
+  color: #333;
+  font-size: 28rpx;
+  padding: 20rpx 30rpx;
 }

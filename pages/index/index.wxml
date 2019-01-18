@@ -1,13 +1,53 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+  <!-- begin of language select -->
+  <view class="lang-change">
+    <view class="from">
+      <view class="currentFrom">
+        <view data-source="from" bindtap="changeLanguage">
+          {{fromLanguage.zhName}}
+          <text class="{{fromIconClass}} iconfont"></text>
+        </view>
+        <view wx:if="{{changeFrom}}" class="list" bindtap="selectLanguage">
+          <view class="item clearfix" wx:for="{{languageList}}" wx:key="{{item.index}}" data-index="{{item.index}}"
+            data-lang="fromLanguage">
+            {{item.zhName}}
+            <text class="icon-right iconfont" wx:if="{{item.index === fromLanguage.index}}"></text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <text class="exchange iconfont icon-jiaohuan" bindtap="exchangeLanguage"></text>
+    <view class="to">
+      <view class="currentTo">
+        <view data-source="to" bindtap="changeLanguage">
+          {{toLanguage.zhName}}
+          <text class="{{toIconClass}} iconfont"></text>
+        </view>
+        <view wx:if="{{changeTo}}" class="list" bindtap="selectLanguage">
+          <view class="item clearfix" wx:for="{{languageList}}" wx:key="{{item.index}}" data-index="{{item.index}}"
+            data-lang="toLanguage">
+            {{item.zhName}}
+            <text class="icon-right iconfont" wx:if="{{item.index === toLanguage.index}}"></text>
+          </view>
+        </view>
+      </view>
+    </view>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <!-- end of language select -->
+  <view class="input-area" wx:if="{{!changeFrom && !changeTo}}">
+    <textarea placeholder="请输入要翻译的文本" placeholder-style="color: #8995a1" bindinput="onInput"
+      bindconfirm="onConfirm" bindblur="onConfirm" value="{{query}}"/>
+      <text class="iconfont icon-close" selectable="false" wx:if="{{canClear}}" bindtap="onTapClose">
+      </text>
+  </view>
+  <!-- end of input -->
+  <view class="result-container">
+    <view class="title">译文</view>
+    <view class="result">
+      <view wx:for="{{result}}" wx:key="index">
+      <text selectable="true">{{item.dst}}</text>
+    </view>
+  </view>
   </view>
 </view>
