@@ -42,7 +42,7 @@
       </text>
   </view>
   <!-- end of input -->
-  <view class="result-container">
+  <view class="result-container" wx:if="{{!changeFrom && !changeTo}}">
     <view class="title">译文</view>
     <view class="result">
       <view wx:for="{{result}}" wx:key="index">

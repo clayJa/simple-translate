@@ -16,6 +16,18 @@ Page({
     query: '',
     result: []
   },
+  onLoad: function( options) {
+    console.log('onload..')
+    let fromLanguage = this.data.languageList.find((item)=>{return item.index === +options.fromLanguage})
+    let toLanguage = this.data.languageList.find((item)=>{return item.index === +options.toLanguage})
+    if(options.query) {
+      this.setData({ query: options.query,fromLanguage,toLanguage })
+    }
+    
+  },
+  onShow: function () {
+    this.onConfirm()
+  },
   //事件处理函数
   changeLanguage(e) {
     if(e.target.dataset.source === 'from'){
@@ -25,7 +37,7 @@ Page({
         fromIconClass: this.data.fromIconClass === 'icon-down' ? 'icon-up' : 'icon-down',
         changeFrom: this.data.changeFrom ? false : true
       })
-    } else{
+    } else if(e.target.dataset.source === 'to'){
       this.setData({
         changeFrom: false,
         fromIconClass: 'icon-down',
@@ -67,8 +79,6 @@ Page({
     }else{
       this.setData({ canClear: false })
     }
-    
-    console.log('focus')
   },
   onTapClose: function() {
     this.setData({ query: '', canClear: false, result: []})
@@ -79,19 +89,9 @@ Page({
       this.setData({'result': res.trans_result})
 
       let history = wx.getStorageSync('history')||[]
-      history.unshift({ query: this.data.query, result: res.trans_result[0].dst})
+      history.unshift({ query: this.data.query, result: res.trans_result[0].dst,toLanguage: this.data.toLanguage.index,fromLanguage: this.data.fromLanguage.index})
       history.length = history.length > 10 ? 10 : history.length
       wx.setStorageSync('history', history)
-    })
-  },
-  onLoad: function () {
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
     })
   }
 })

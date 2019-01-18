@@ -1,13 +1,14 @@
-//index.js
-//获取应用实例
-const app = getApp()
-
 Page({
   data: {
+    history: []
   },
-  //事件处理函数
-  bindViewTap: function() {
+  onShow: function () {
+    this.setData({ history: wx.getStorageSync('history')})
   },
-  onLoad: function () {
+
+  onTapItem: function(e) {
+    wx.reLaunch({
+      url: `/pages/index/index?query=${e.currentTarget.dataset.source.query}&fromLanguage=${e.currentTarget.dataset.source.fromLanguage}&toLanguage=${e.currentTarget.dataset.source.toLanguage}`
+    })
   },
 })
