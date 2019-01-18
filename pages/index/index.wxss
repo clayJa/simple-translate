@@ -60,7 +60,7 @@
   padding: 20rpx 30rpx;
 }
 .result-container .result{
-  color: #333;
+  color: #000;
   font-size: 28rpx;
   padding: 20rpx 30rpx;
 }
